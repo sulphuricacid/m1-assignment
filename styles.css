@@ -20,6 +20,9 @@
 
 /* ---------- Base page ---------- */
 
+/* Smooth scrolling when following in-page links */
+html { scroll-behavior: smooth; }
+
 body {
   font-family: Verdana, Geneva, sans-serif;
   max-width: 880px;
@@ -42,14 +45,32 @@ header {
   box-shadow: 0 3px 10px rgba(52, 105, 61, 0.25);
 }
 
-header h1 { margin: 0 0 8px 0; }
+header h1 {
+  margin: 0 0 8px 0;
+  /* Fluid type: scales with the viewport but never below 1.5rem or above 2.4rem */
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+}
+
 header p  { margin: 0; color: #d8ecd8; }
 
+/* The whole banner fades and slides in when the page loads */
+@keyframes fade-slide-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+header { animation: fade-slide-in 0.6s ease-out; }
+
+/* The menu sticks to the top of the window while scrolling */
 nav {
+  position: sticky;
+  top: 8px;
+  z-index: 10;
   background-color: var(--mint);
   padding: 10px 16px;
   border-radius: 8px;
   margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 nav a {
@@ -107,6 +128,16 @@ li::marker {
 ::selection {
   background-color: var(--brand-green);
   color: #ffffff;
+}
+
+/* Pseudo-element: newspaper-style drop cap on the welcome paragraph */
+.intro::first-letter {
+  float: left;
+  font-size: 2.8em;
+  line-height: 1;
+  padding-right: 8px;
+  font-weight: bold;
+  color: var(--brand-green);
 }
 
 /* ---------- Images and figures ---------- */
@@ -188,6 +219,41 @@ tbody tr:hover {
   background-color: var(--accent-cream);
   transition: background-color 0.15s ease;
 }
+
+/* Structural pseudo-class: the adoption-fee column (last cell of each row)
+   stands out in bold brand green */
+.pets-table td:last-child {
+  font-weight: bold;
+  color: var(--brand-green);
+  white-space: nowrap;
+}
+
+/* ---------- Event cards (CSS Grid) ---------- */
+
+/* The events list becomes a responsive grid of cards */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.event-grid li {
+  background-color: #ffffff;
+  border: 1px solid var(--mint-border);
+  border-left: 4px solid var(--brand-green);
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-grid li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.event-grid strong { color: var(--brand-green); }
 
 /* ---------- Callouts, stories and quotes ---------- */
 
