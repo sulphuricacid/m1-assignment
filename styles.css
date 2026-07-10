@@ -1,0 +1,162 @@
+/* ==========================================================================
+   Peach State Paws — shared site stylesheet
+   Module 1, Week 2, Day 3 Lab Assignment
+   One external stylesheet used by all three pages (index, adopt, happy-tails)
+   ========================================================================== */
+
+/* CSS custom properties (variables) so the whole site shares one palette */
+:root {
+  --brand-green: #34693d;
+  --brand-green-light: #4a8552;
+  --mint: #eaf3ea;
+  --mint-border: #d5e6d5;
+  --table-border: #bcd4bc;
+  --accent-orange: #e2953f;
+  --accent-cream: #fff2df;
+  --page-bg: #fbf8f3;
+  --text-main: #2b2b2b;
+  --text-muted: #555;
+}
+
+/* ---------- Base page ---------- */
+
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.7;
+  color: var(--text-main);
+  background-color: var(--page-bg);
+}
+
+/* ---------- Header and navigation ---------- */
+
+header {
+  background-color: var(--brand-green);
+  color: #ffffff;
+  padding: 26px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+header h1 { margin: 0 0 8px 0; }
+header p  { margin: 0; color: #d8ecd8; }
+
+nav {
+  background-color: var(--mint);
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+nav a {
+  margin-right: 18px;
+  color: var(--brand-green);
+  font-weight: bold;
+}
+
+/* ---------- Headings ---------- */
+
+h2 {
+  color: var(--brand-green);
+  border-bottom: 2px solid var(--mint-border);
+  padding-bottom: 6px;
+}
+
+h3 { color: var(--brand-green-light); }
+
+/* ---------- Images and figures ---------- */
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+figure { margin: 16px 0; }
+
+figcaption {
+  font-size: 0.82em;
+  color: #666;
+  font-style: italic;
+}
+
+.pet-photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pet-photos figure {
+  flex: 1 1 250px;
+  margin: 0;
+}
+
+/* ---------- Tables ---------- */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0;
+  font-size: 0.92em;
+}
+
+caption {
+  caption-side: top;
+  font-weight: bold;
+  color: var(--brand-green);
+  padding-bottom: 8px;
+  text-align: left;
+}
+
+th, td {
+  border: 1px solid var(--table-border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background-color: var(--brand-green);
+  color: #ffffff;
+}
+
+tr:nth-child(even) { background-color: var(--mint); }
+
+/* ---------- Callouts, stories and quotes ---------- */
+
+.highlight {
+  background-color: var(--accent-cream);
+  border-left: 4px solid var(--accent-orange);
+  padding: 12px 16px;
+  border-radius: 4px;
+}
+
+.story {
+  background-color: #ffffff;
+  border: 1px solid var(--mint-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.story h3 { margin-top: 0; }
+
+blockquote {
+  margin: 8px 0 0 0;
+  padding-left: 14px;
+  border-left: 3px solid var(--accent-orange);
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+  margin-top: 32px;
+  padding-top: 12px;
+  border-top: 2px solid var(--mint-border);
+  font-size: 0.88em;
+  color: var(--text-muted);
+}
