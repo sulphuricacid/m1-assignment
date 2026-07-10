@@ -33,11 +33,13 @@ body {
 /* ---------- Header and navigation ---------- */
 
 header {
-  background-color: var(--brand-green);
+  background-color: var(--brand-green); /* fallback for old browsers */
+  background-image: linear-gradient(135deg, var(--brand-green), var(--brand-green-light));
   color: #ffffff;
   padding: 26px;
   border-radius: 10px;
   text-align: center;
+  box-shadow: 0 3px 10px rgba(52, 105, 61, 0.25);
 }
 
 header h1 { margin: 0 0 8px 0; }
@@ -51,10 +53,36 @@ nav {
 }
 
 nav a {
-  margin-right: 18px;
+  display: inline-block;
+  margin-right: 10px;
+  padding: 4px 12px;
+  border-radius: 6px;
   color: var(--brand-green);
   font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
+
+/* Menu links keep the brand color even after being visited */
+nav a:link,
+nav a:visited {
+  color: var(--brand-green);
+}
+
+/* Pseudo-class: menu items light up as the mouse passes over them */
+nav a:hover,
+nav a:focus {
+  background-color: var(--brand-green);
+  color: #ffffff;
+}
+
+/* ---------- Text links (LVHA pseudo-class order) ---------- */
+
+a         { color: var(--brand-green-light); transition: color 0.2s ease; }
+a:link    { text-decoration-color: var(--table-border); }
+a:visited { color: #7a6a52; }
+a:hover   { color: var(--accent-orange); }
+a:active  { color: #b56a1e; }
 
 /* ---------- Headings ---------- */
 
@@ -64,7 +92,22 @@ h2 {
   padding-bottom: 6px;
 }
 
+/* Pseudo-element: paw print stamped before every section heading */
+h2::before { content: "🐾 "; }
+
 h3 { color: var(--brand-green-light); }
+
+/* Pseudo-element: brand-colored bullets and list numbers */
+li::marker {
+  color: var(--brand-green);
+  font-weight: bold;
+}
+
+/* Pseudo-element: highlighted text picks up the brand color */
+::selection {
+  background-color: var(--brand-green);
+  color: #ffffff;
+}
 
 /* ---------- Images and figures ---------- */
 
@@ -82,6 +125,9 @@ figcaption {
   font-style: italic;
 }
 
+/* Pseudo-element: small camera icon before every photo caption */
+figcaption::before { content: "📷 "; }
+
 /* Photo gallery laid out with CSS Grid: columns adapt to the screen width
    automatically — no media query needed */
 .pet-photos {
@@ -96,6 +142,13 @@ figcaption {
   width: 100%;
   height: 200px;
   object-fit: cover; /* crop photos of different sizes to matching tiles */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Pseudo-class + transform: pet photos gently zoom on hover */
+.pet-photos figure:hover img {
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
 }
 
 /* ---------- Tables ---------- */
@@ -127,7 +180,14 @@ th {
   color: #ffffff;
 }
 
+/* Structural pseudo-class: zebra-striped rows */
 tr:nth-child(even) { background-color: var(--mint); }
+
+/* Pseudo-class: the row under the cursor glows so it is easy to read across */
+tbody tr:hover {
+  background-color: var(--accent-cream);
+  transition: background-color 0.15s ease;
+}
 
 /* ---------- Callouts, stories and quotes ---------- */
 
@@ -144,6 +204,13 @@ tr:nth-child(even) { background-color: var(--mint); }
   border-radius: 8px;
   padding: 16px 20px;
   margin: 16px 0;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Pseudo-class: story cards lift slightly when hovered */
+.story:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 
 .story h3 { margin-top: 0; }
@@ -212,6 +279,29 @@ blockquote {
   align-self: start;
 }
 
+/* Pseudo-element: hint text inside empty fields */
+.adoption-form ::placeholder {
+  color: #9a9a9a;
+  font-style: italic;
+}
+
+/* Pseudo-class: the field being typed in gets a green focus ring */
+.adoption-form input:focus,
+.adoption-form select:focus,
+.adoption-form textarea:focus {
+  outline: none;
+  border-color: var(--brand-green);
+  box-shadow: 0 0 0 3px rgba(52, 105, 61, 0.18);
+  background-color: #ffffff;
+}
+
+/* Pseudo-class: required fields carry an orange edge until filled in */
+.adoption-form input:required { border-left: 3px solid var(--accent-orange); }
+
+/* Pseudo-classes: live validation once the visitor has typed something */
+.adoption-form input:not(:placeholder-shown):valid   { border-left: 3px solid var(--brand-green-light); }
+.adoption-form input:not(:placeholder-shown):invalid { border-left: 3px solid #c0392b; }
+
 .option-row {
   display: flex;
   flex-wrap: wrap;
@@ -233,6 +323,20 @@ blockquote {
   border-radius: 8px;
   padding: 12px 24px;
   cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+/* Pseudo-classes: the button lifts on hover and presses down on click */
+.adoption-form button:hover,
+.adoption-form button:focus {
+  background-color: var(--brand-green-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(52, 105, 61, 0.35);
+}
+
+.adoption-form button:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 /* ---------- Footer ---------- */
