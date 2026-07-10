@@ -82,15 +82,20 @@ figcaption {
   font-style: italic;
 }
 
+/* Photo gallery laid out with CSS Grid: columns adapt to the screen width
+   automatically — no media query needed */
 .pet-photos {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 12px;
 }
 
-.pet-photos figure {
-  flex: 1 1 250px;
-  margin: 0;
+.pet-photos figure { margin: 0; }
+
+.pet-photos img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* crop photos of different sizes to matching tiles */
 }
 
 /* ---------- Tables ---------- */
@@ -149,6 +154,85 @@ blockquote {
   border-left: 3px solid var(--accent-orange);
   font-style: italic;
   color: var(--text-muted);
+}
+
+/* ---------- Adoption form ---------- */
+
+.adoption-form fieldset {
+  border: 1px solid var(--mint-border);
+  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.adoption-form legend {
+  font-weight: bold;
+  color: var(--brand-green);
+  padding: 0 8px;
+}
+
+/* Two-column CSS Grid: labels in the first column, fields in the second.
+   On narrow screens it collapses to a single column. */
+.form-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 12px 16px;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+.form-grid > label,
+.form-grid .form-label {
+  font-weight: bold;
+  font-size: 0.92em;
+  color: var(--text-main);
+}
+
+.adoption-form input[type="text"],
+.adoption-form input[type="email"],
+.adoption-form input[type="tel"],
+.adoption-form select,
+.adoption-form textarea {
+  font-family: inherit;
+  font-size: 0.95em;
+  padding: 8px 10px;
+  border: 1px solid var(--table-border);
+  border-radius: 6px;
+  background-color: var(--page-bg);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.adoption-form textarea {
+  resize: vertical;
+  align-self: start;
+}
+
+.option-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+}
+
+.option-row label {
+  font-weight: normal;
+  font-size: 0.92em;
+}
+
+.adoption-form button {
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: var(--brand-green);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
 }
 
 /* ---------- Footer ---------- */

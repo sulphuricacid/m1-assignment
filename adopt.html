@@ -131,6 +131,67 @@
         says pets need 3 days to decompress, 3 weeks to settle, and 3 months to feel at home.</li>
   </ol>
 
+  <h2>Adoption Application</h2>
+  <p>
+    Found a friend above? Start your application here — it takes about two
+    minutes, and a volunteer will call you within one business day.
+  </p>
+
+  <form class="adoption-form" action="#" method="post">
+    <fieldset>
+      <legend>About you</legend>
+      <div class="form-grid">
+        <label for="full-name">Full name</label>
+        <input type="text" id="full-name" name="full-name" placeholder="Jane Doe" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" placeholder="(404) 555-0123">
+
+        <label for="city">City in Georgia</label>
+        <input type="text" id="city" name="city" placeholder="Atlanta" required>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>About your future pet</legend>
+      <div class="form-grid">
+        <label for="pet-choice">Which pet caught your eye?</label>
+        <select id="pet-choice" name="pet-choice">
+          <option value="">— Choose a pet —</option>
+          <option value="kim">Kim (shepherd-mix puppy)</option>
+          <option value="buddy">Buddy (Labrador mix)</option>
+          <option value="willow">Willow (tabby cat)</option>
+          <option value="peaches">Peaches (kitten)</option>
+          <option value="coconut">Coconut (rabbit)</option>
+          <option value="scout">Scout (senior beagle)</option>
+        </select>
+
+        <span class="form-label">Your home is a…</span>
+        <span class="option-row">
+          <label><input type="radio" name="home-type" value="house"> House with a yard</label>
+          <label><input type="radio" name="home-type" value="apartment"> Apartment</label>
+          <label><input type="radio" name="home-type" value="other"> Other</label>
+        </span>
+
+        <span class="form-label">Household includes</span>
+        <span class="option-row">
+          <label><input type="checkbox" name="has-kids" value="yes"> Children</label>
+          <label><input type="checkbox" name="has-dogs" value="yes"> Dogs</label>
+          <label><input type="checkbox" name="has-cats" value="yes"> Cats</label>
+        </span>
+
+        <label for="message">Tell us a little about your home</label>
+        <textarea id="message" name="message" rows="4"
+          placeholder="Work schedule, activity level, past pets — anything that helps us match you!"></textarea>
+      </div>
+    </fieldset>
+
+    <button type="submit">Send my application 🐾</button>
+  </form>
+
   <h2>Research Before You Adopt</h2>
   <ul>
     <li><a href="https://en.wikipedia.org/wiki/Dog">Wikipedia — Dogs</a></li>
