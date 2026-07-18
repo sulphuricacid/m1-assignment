@@ -182,6 +182,106 @@ figcaption::before { content: "📷 "; }
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
 }
 
+/* ---------- Gallery page (Week 3 Day 3 lab) ----------
+   Five rules below target: the list, the caption, the description,
+   the list on hover, and the description when the list is hovered. */
+
+/* The gallery list itself: grid layout, no bullets */
+#album {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+/* 1. list — parent is positioned so the description can anchor inside it */
+#album li {
+  position: relative;
+  background-color: var(--mint);
+  border: 1px solid var(--mint-border);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+/* 2. caption — always visible below each image */
+.caption {
+  margin: 8px 0 0 0;
+  font-size: 0.85em;
+  font-weight: bold;
+  color: var(--brand-green);
+}
+
+/* 3. description — hidden by default, pinned over the bottom of the photo */
+.description {
+  visibility: hidden;
+  position: absolute;
+  left: 8px;
+  bottom: 44px;
+  right: 8px;
+  margin: 0;
+  padding: 10px;
+  font-size: 0.78em;
+  color: #ffffff;
+  background-color: rgba(43, 43, 43, 0.85);
+  border-radius: 0 0 8px 8px;
+}
+
+/* 4. list on hover — finger cursor invites the mouse over */
+#album li:hover {
+  cursor: pointer;
+}
+
+/* 5. description on list hover — reveal the hidden description box */
+#album li:hover .description {
+  visibility: visible;
+}
+
+/* Photos filtered out by the search box are removed from the layout */
+.hidden {
+  display: none;
+}
+
+/* Favorite star — sits on the top-right corner of each photo */
+.star {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 1.7rem;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* A starred (favorited) photo shows a gold star */
+.star.starred {
+  color: gold;
+}
+
+/* Favorites counter above the gallery */
+#fav-bar {
+  font-weight: bold;
+  color: var(--brand-green);
+}
+
+/* The gallery search box */
+#search {
+  font: inherit;
+  padding: 6px 12px;
+  border: 1px solid var(--mint-border);
+  border-radius: 999px;
+  background-color: #ffffff;
+  width: min(320px, 100%);
+}
+
+#search:focus {
+  outline: 2px solid var(--brand-green-light);
+}
+
 /* ---------- Tables ---------- */
 
 table {

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Gallery — Peach State Paws, Georgia</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>Photo Gallery</h1>
+    <p>Eleven of our favorite faces — hover over a photo to learn more about it</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="adopt.html">Meet Our Pets &amp; Adopt</a>
+    <a href="happy-tails.html">Happy Tails &amp; Fun Facts</a>
+    <a href="gallery.html">Gallery</a>
+  </nav>
+
+  <h2>Our Pets in Pictures</h2>
+  <p>
+    All photos are the same size (600 &times; 450). The gallery below was first
+    marked up with HTML list elements, then converted to display using
+    JavaScript arrays and loops — the markup you see in the page source is
+    deactivated and kept for reference.
+  </p>
+
+  <!-- Search box: filters the gallery by caption as you type -->
+  <p>
+    <label for="search">🔍 Search photos by caption:</label>
+    <input type="text" id="search" placeholder="Try 'cat', 'max' or 'snow'...">
+  </p>
+
+  <!-- Favorites counter: updated by JavaScript when stars are clicked -->
+  <p id="fav-bar">⭐ Favorites: <span id="fav-count">0</span> of 3</p>
+
+  <ul id="album">
+    <!--deactivated: this gallery is now created by JavaScript at the bottom of the page
+    <li class="photo">
+      <img src="images/gallery/gallery1.jpg" alt="Adoption day at the park">
+    </li>
+    <li class="photo">
+      <img src="images/gallery/gallery2.jpg" alt="A golden retriever running across a lawn">
+    </li>
+    <li class="photo">
+      <img src="images/gallery/gallery3.jpg" alt="A black kitten playing with a toy">
+    </li>
+    <li class="photo">
+      <img src="images/gallery/gallery4.jpg" alt="A puppy resting on the grass">
+    </li>
+    <li class="photo">
+      <img src="images/gallery/gallery5.jpg" alt="A rabbit sitting in a meadow">
+    </li>
+    <li class="photo">
+      <img src="images/gallery/gallery6.jpg" alt="A shelter cat looking at the camera">
+    </li>
+    <li class="photo">
+      <img src="images/gallery/gallery7.jpg" alt="Dogs waiting at the shelter">
+    </li>
+    <li class="photo">
+      <img src="images/gallery/gallery8.jpg" alt="A cat walking through the snow">
+    </li>
+    <li class="photo">
+      <img src="images/gallery/gallery9.jpg" alt="A green-eyed cat close up">
+    </li>
+    <li class="photo">
+      <img src="images/gallery/gallery10.jpg" alt="A curious tabby cat">
+    </li>
+    <li class="photo">
+      <img src="images/gallery/gallery11.jpg" alt="A labrador retriever portrait">
+    </li>
+    -->
+  </ul>
+
+  <p class="highlight">
+    <strong>See someone you like?</strong> Visit our
+    <a href="adopt.html">Meet Our Pets &amp; Adopt</a> page or come to the next
+    Piedmont Park adoption event.
+  </p>
+
+  <footer>
+    <p><a href="index.html">← Home</a> · <a href="adopt.html">Meet Our Pets &amp; Adopt</a> · <a href="happy-tails.html">Happy Tails &amp; Fun Facts</a></p>
+    <p>Peach State Paws · Serving Georgia communities · Student lab project.
+    Images from Wikimedia Commons.</p>
+  </footer>
+
+<!--JavaScript Codes (see gallery.js)-->
+<script src="gallery.js"></script>
+
+</body>
+</html>
