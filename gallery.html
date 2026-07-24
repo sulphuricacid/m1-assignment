@@ -37,6 +37,9 @@
   <!-- Favorites counter: updated by JavaScript when stars are clicked -->
   <p id="fav-bar">⭐ Favorites: <span id="fav-count">0</span> of 3</p>
 
+  <!-- Info box open counter: updated by JavaScript each time any info box opens -->
+  <p id="open-count-bar">📋 Info boxes opened: <span id="open-count">0</span></p>
+
   <ul id="album">
     <!--deactivated: this gallery is now created by JavaScript at the bottom of the page
     <li class="photo">
@@ -74,6 +77,10 @@
     </li>
     -->
   </ul>
+
+  <!-- Info box: floats above the gallery when a description bar is clicked.
+       Left empty here on purpose — gallery.js assembles its contents with innerHTML. -->
+  <div id="info-box"></div>
 
   <p class="highlight">
     <strong>See someone you like?</strong> Visit our

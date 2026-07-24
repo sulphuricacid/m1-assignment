@@ -244,6 +244,44 @@ figcaption::before { content: "📷 "; }
   display: none;
 }
 
+/* Info box (Week 4 Day 3 lab): hidden by default, floats centered above
+   the gallery once gallery.js adds the "is-open" class. pointer-events
+   is off while hidden so the invisible box never blocks clicks to
+   whatever's behind it. */
+#info-box {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  padding: 20px;
+  background-color: rgba(43, 43, 43, 0.92);
+  color: #ffffff;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 100;
+}
+
+/* Fades the box in/out instead of it snapping into view */
+#info-box.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#info-box h3 {
+  margin-top: 0;
+  color: #ffffff;
+}
+
+#info-box a {
+  display: inline-block;
+  margin-top: 12px;
+  color: gold;
+}
+
 /* Favorite star — sits on the top-right corner of each photo */
 .star {
   position: absolute;

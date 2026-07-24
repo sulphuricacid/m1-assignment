@@ -1,22 +1,15 @@
-//============================================
-//Gallery — converted from HTML to JavaScript
-//Module 1, Week 3, Day 3 Lab Assignment
-//Photos display in a RANDOM order on every refresh,
-//without changing the original arrays.
-//============================================
-var photos = []; //Declare an empty array to store image elements
-var fileNames = []; //Declare an empty array to store image file names
-var imageList = []; //Declare an empty array to store html list that contain an image
-var image; //Declare an empty variable to store the assembled image list codes
-var openList = "<li id='photo"; //Declare a variable to contain open list tag (class changed to id — photo1, photo2 and so on)
-var closeList = "</li>"; //Declare a variable to contain close list tag
-var openCaptionTag = "<p class='caption'>"; //Declare a variable to contain open caption tag
-var closeCaptionTag = "</p>"; //Declare a variable to contain close caption tag
-var openDescTag = "<p class='description'>"; //Declare a variable to contain open description tag
-var closeDescTag = "</p>"; //Declare a variable to contain close description tag
-var starTag = "<span class='star'>☆</span>"; //Declare a variable to contain the favorite star (empty star to start)
+var photos = [];
+var fileNames = [];
+var imageList = [];
+var image;
+var openList = "<li id='photo";
+var closeList = "</li>";
+var openCaptionTag = "<p class='caption'>";
+var closeCaptionTag = "</p>";
+var openDescTag = "<p class='description'>";
+var closeDescTag = "</p>";
+var starTag = "<span class='star'>☆</span>";
 
-//Array that contains a collection of caption texts, one per photo
 var captionTexts = [
   "Adoption Day",
   "Max the Golden",
@@ -31,7 +24,6 @@ var captionTexts = [
   "Daisy the Lab"
 ];
 
-//Array that contains a collection of description texts, one per photo
 var descTexts = [
   "Families meeting their new best friends at our Piedmont Park adoption event.",
   "Max sprinting across his new Marietta backyard, one year after adoption.",
@@ -46,103 +38,161 @@ var descTexts = [
   "Gentle Daisy is our most patient listener at kids' reading hour."
 ];
 
-//============================================
-//Random order — build a separate ORDER array and shuffle it.
-//The original arrays (captionTexts, descTexts) are never touched;
-//we only shuffle this list of index numbers.
-//============================================
-var order = []; //Declare an empty array to store the photo index numbers
+//Only shown in the info box, not on the hover description bar
+var funFacts = [
+  "Fun fact: our adoption events run every first Saturday of the month at Piedmont Park.",
+  "Fun fact: golden retrievers are one of the most popular family dog breeds in Georgia.",
+  "Fun fact: black cats are adopted less often than any other color — Luna is out to change that.",
+  "Fun fact: puppies Bailey's age need a potty break at least twice an hour!",
+  "Fun fact: pet rabbits can live up to 10 years — a longer commitment than most people expect.",
+  "Fun fact: Willow is already spayed, vaccinated, and microchipped, ready to go home today.",
+  "Fun fact: bonded pairs like these two get a discounted adoption fee when adopted together.",
+  "Fun fact: Georgia sees snow so rarely most of our shelter pets have never seen it before!",
+  "Fun fact: a cat's eye color is fully set by around 12 weeks old.",
+  "Fun fact: 'tabby' isn't a breed — it describes any cat with that classic striped coat pattern.",
+  "Fun fact: Labrador retrievers have been America's most popular dog breed for over 30 years."
+];
 
-//Fill the order array with indexes 0 - 10, one for each photo
+//Shuffle a separate array of index numbers so captionTexts/descTexts
+//stay in their original order and can still be indexed by photo number
+var order = [];
 for (var i = 0; i < 11; i++) {
   order.push(i);
 }
 
-//Shuffle the order array (Fisher-Yates shuffle): walk backwards through the
-//array and swap each position with a randomly picked earlier position
 for (var i = order.length - 1; i > 0; i--) {
-  var j = Math.floor(Math.random() * (i + 1)); //Pick a random position from 0 to i
-  var temp = order[i]; //Hold the current value
-  order[i] = order[j]; //Move the randomly picked value here
-  order[j] = temp; //Put the held value in the picked spot
+  var j = Math.floor(Math.random() * (i + 1));
+  var temp = order[i];
+  order[i] = order[j];
+  order[j] = temp;
 }
 
-//Create a loop to create 11 images following the shuffled order
 for (var i = 0; i < 11; i++) {
-  var pick = order[i]; //The original index of the photo to show at this position
-  fileNames.push("gallery" + (pick + 1)); //Create image file name and store in the array
-  photos.push("<img src='images/gallery/" + fileNames[i] + ".jpg' alt='" + captionTexts[pick] + "'>"); //Assemble file name into image element and store in an array
-  image = openList + (pick + 1) + "'>" + photos[i] + starTag + openCaptionTag + captionTexts[pick] + closeCaptionTag + openDescTag + descTexts[pick] + closeDescTag + closeList; //Assemble image element, star, caption and description from arrays with list elements and store in a variable
-  imageList.push(image); //Store(push) the assembled list codes into an array
+  var pick = order[i];
+  fileNames.push("gallery" + (pick + 1));
+  photos.push("<img src='images/gallery/" + fileNames[i] + ".jpg' alt='" + captionTexts[pick] + "'>");
+  image = openList + (pick + 1) + "'>" + photos[i] + starTag + openCaptionTag + captionTexts[pick] + closeCaptionTag + openDescTag + descTexts[pick] + closeDescTag + closeList;
+  imageList.push(image);
 }
 
-//Display all eleven image codes stored in the array
-//join("") glues the list items together with nothing in between (no commas)
 document.getElementById("album").innerHTML = imageList.join("");
 
-//TESTS: refresh the page and watch the display order change while the
-//original captionTexts array always stays in its original order
 console.log("Display order this refresh →", order);
 console.log("Original captionTexts (unchanged) →", captionTexts);
 
-//============================================
-//Search filter — as the user types, only photos whose caption
-//contains the typed text stay visible. No page reload needed.
-//============================================
-var searchBox = document.getElementById("search"); //The text input above the gallery
-var listItems = document.getElementById("album").getElementsByTagName("li"); //All 11 photo list items
+//Search filter — hides photos whose caption doesn't match as the user types
+var searchBox = document.getElementById("search");
+var listItems = document.getElementById("album").getElementsByTagName("li");
 
-//INPUT EVENT LISTENER: runs every time the text in the box changes
 searchBox.addEventListener("input", function () {
-  var searchText = searchBox.value.toLowerCase(); //Lowercase the typed text (case-insensitive match)
+  var searchText = searchBox.value.toLowerCase();
 
-  //Loop through every photo in the gallery
   for (var i = 0; i < listItems.length; i++) {
-    var captionText = listItems[i].getElementsByClassName("caption")[0].innerText.toLowerCase(); //Lowercase this photo's caption
+    var captionText = listItems[i].getElementsByClassName("caption")[0].innerText.toLowerCase();
 
-    //indexOf returns -1 when the typed text is NOT found in the caption.
-    //An empty search box is "found" in every caption (indexOf returns 0),
-    //so all photos become visible again automatically.
     if (captionText.indexOf(searchText) == -1) {
-      listItems[i].classList.add("hidden"); //No match — hide this photo
+      listItems[i].classList.add("hidden");
     } else {
-      listItems[i].classList.remove("hidden"); //Match — show this photo
+      listItems[i].classList.remove("hidden");
     }
   }
 });
 
-//============================================
-//Favorites — click the star near a photo to add it to favorites.
-//A counter shows how many are starred. Maximum of 3: starring a
-//4th photo throws an alert instead.
-//============================================
-var favCount = 0; //How many photos are currently starred
-var maxFavs = 3; //The most photos allowed in favorites
-var stars = document.getElementsByClassName("star"); //All 11 star elements
+//Favorites — star up to 3 photos, counter updates as you star/unstar
+var favCount = 0;
+var maxFavs = 3;
+var stars = document.getElementsByClassName("star");
 
-//The function that runs when any star is clicked
 function starClick() {
-  //"this" is the exact star that was clicked
   if (this.classList.contains("starred")) {
-    //Already starred — clicking again removes it from favorites
     this.classList.remove("starred");
-    this.innerText = "☆"; //Back to the empty star
-    favCount--; //One less favorite
+    this.innerText = "☆";
+    favCount--;
   } else if (favCount == maxFavs) {
-    //Trying to star a 4th photo — not allowed!
     alert("You can star only " + maxFavs + " photos at max! Unstar one first.");
   } else {
-    //Room available — add this photo to favorites
     this.classList.add("starred");
-    this.innerText = "★"; //Filled star
-    favCount++; //One more favorite
+    this.innerText = "★";
+    favCount++;
   }
 
-  //Update the favorites counter on the page
   document.getElementById("fav-count").innerText = favCount;
 }
 
-//Attach the click listener to every star in the gallery
 for (var i = 0; i < stars.length; i++) {
   stars[i].addEventListener("click", starClick);
 }
+
+//Info box — click a photo's description bar to open a box that floats
+//above the gallery with its heading, extra info, and a close link
+var infoBoxData = [];
+for (var i = 0; i < captionTexts.length; i++) {
+  infoBoxData.push({
+    heading: captionTexts[i],
+    text: descTexts[i] + " " + funFacts[i],
+    closeText: "Click This To Close"
+  });
+}
+
+var openHeadingTag = "<h3>";
+var closeHeadingTag = "</h3>";
+var openTextTag = "<p>";
+var closeTextTag = "</p>";
+
+var infoBox = document.getElementById("info-box");
+var descBars = document.getElementsByClassName("description");
+var openCount = 0;
+var openCountDisplay = document.getElementById("open-count");
+
+//All description bars share this one #info-box element, so opening a new
+//photo's box always overwrites whatever was showing — only one box can
+//ever be visible, and a close can never reach a different photo's box
+function openInfoBox() {
+  var photoId = this.parentElement.id;
+  var index = parseInt(photoId.replace("photo", "")) - 1;
+  var data = infoBoxData[index];
+
+  var heading = openHeadingTag + data.heading + closeHeadingTag;
+  var text = openTextTag + data.text + closeTextTag;
+  var closeLink = "<a href='#' id='info-close'>" + data.closeText + "</a>";
+
+  infoBox.innerHTML = heading + text + closeLink;
+  infoBox.classList.add("is-open");
+
+  openCount++;
+  openCountDisplay.innerText = openCount;
+}
+
+function closeInfoBox() {
+  infoBox.classList.remove("is-open");
+}
+
+for (var i = 0; i < descBars.length; i++) {
+  descBars[i].addEventListener("click", openInfoBox);
+}
+
+//Delegated listener registered once, instead of re-attaching to a new
+//close link every time innerHTML rebuilds the box
+infoBox.addEventListener("click", function (e) {
+  if (e.target.id === "info-close") {
+    e.preventDefault();
+    closeInfoBox();
+  }
+});
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    closeInfoBox();
+  }
+});
+
+//Ignores clicks inside the box and the description-bar click that just
+//opened it — both fire on this same document listener via bubbling, so
+//without the checks the box would open and instantly close in one click
+document.addEventListener("click", function (e) {
+  var clickedInsideBox = infoBox.contains(e.target);
+  var clickedADescriptionBar = e.target.classList.contains("description");
+  if (!clickedInsideBox && !clickedADescriptionBar) {
+    closeInfoBox();
+  }
+});
