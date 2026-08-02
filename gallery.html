@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photo Gallery — Peach State Paws, Georgia</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- jQuery Library (lightbox) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -82,6 +85,12 @@
        Left empty here on purpose — gallery.js assembles its contents with innerHTML. -->
   <div id="info-box"></div>
 
+  <!-- Lightbox: hidden by default, opened by lightbox.js when a gallery photo is clicked -->
+  <div class="lightbox-backdrop"></div>
+  <div class="lightbox-box">
+    <div class="lightbox-close">&times;</div>
+  </div>
+
   <p class="highlight">
     <strong>See someone you like?</strong> Visit our
     <a href="adopt.html">Meet Our Pets &amp; Adopt</a> page or come to the next
@@ -96,6 +105,9 @@
 
 <!--JavaScript Codes (see gallery.js)-->
 <script src="gallery.js"></script>
+
+<!--jQuery Lightbox (see lightbox.js)-->
+<script src="lightbox.js"></script>
 
 </body>
 </html>
